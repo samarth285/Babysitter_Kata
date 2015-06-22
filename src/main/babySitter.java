@@ -45,16 +45,20 @@ public class babySitter {
 					+ (endTime-MIDNIGHT_TIME)*AFTER_MIDNIGHT_PAY);
 	}
 	
+	private static int convertTime(int time)
+	{
+		if(time<NOON_TIME)
+		{
+			time += TIME_MODULO_CONST;
+		}
+		return time;
+	}
+	
 	public static long calculatePay(int startTime, int bedTime, int endTime)
 	{
-		if(startTime<NOON_TIME)
-			startTime += TIME_MODULO_CONST;
-		
-		if(bedTime<NOON_TIME)
-			bedTime += TIME_MODULO_CONST;
-		
-		if (endTime<NOON_TIME)
-			endTime += TIME_MODULO_CONST;
+		startTime = convertTime(startTime);
+		bedTime = convertTime(bedTime);
+		endTime = convertTime(endTime);
 		
 		if(startTime<=MIDNIGHT_TIME)
 		{			
