@@ -1,9 +1,9 @@
 package main;
 
 public class babySitter {
-
-	private static final int AFTER_MIDNIGHT_PAY = 16;
+	
 	private static final int MIDNIGHT = 24;
+	private static final int AFTER_MIDNIGHT_PAY = 16;
 	private static final int START_TIME_TO_BED_TIME_PAY = 12;
 	private static final int BED_TIME_TO_MIDNIGHT_PAY = 8;
 	
@@ -26,7 +26,10 @@ public class babySitter {
 	{
 		if((MIDNIGHT-bed) >= 0)
 			if(end <= MIDNIGHT)
-				return (end-bed)*BED_TIME_TO_MIDNIGHT_PAY;
+				if(bed>=start)
+					return (end-bed)*BED_TIME_TO_MIDNIGHT_PAY;
+				else
+					return (end-start)*BED_TIME_TO_MIDNIGHT_PAY;
 			else
 				return (MIDNIGHT-bed)*BED_TIME_TO_MIDNIGHT_PAY;
 		else
@@ -37,9 +40,12 @@ public class babySitter {
 	{
 		if((end-MIDNIGHT) >= 0)
 			if(bed <= MIDNIGHT)
-				return (end-MIDNIGHT)*AFTER_MIDNIGHT_PAY;
+					return (end-MIDNIGHT)*AFTER_MIDNIGHT_PAY;
 			else
-				return (end-bed)*AFTER_MIDNIGHT_PAY;
+				if(bed>=start)
+					return (end-bed)*AFTER_MIDNIGHT_PAY;
+				else
+					return (end-start)*AFTER_MIDNIGHT_PAY;
 		else
 			return 0;
 	}

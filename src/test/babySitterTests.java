@@ -93,6 +93,32 @@ public class babySitterTests {
 	
 	
 	
+	@Test
+	public void whenStartTimeHappensAfterBedTimeScenario1()
+	{
+		assertEquals(8, babySitter.calculatePay(22, 21, 23));
+	}
+	
+	@Test
+	public void whenStartTimeHappensAfterBedTimeScenario2()
+	{
+		assertEquals(16, babySitter.calculatePay(2, 1, 3));
+	}
+	
+//	
+//	@Test
+//	public void tp3()
+//	{
+//		assertEquals(12, babySitter.calculatePay(21, 23, 22));
+//	}
+//	
+//	@Test
+//	public void tp4()
+//	{
+//		assertEquals(16, babySitter.calculatePay(2, 1, 3));
+//	}
+	
+	
 	
 
 }
