@@ -61,6 +61,37 @@ public class babySitterTests {
 		assertEquals(16, babySitter.calculatePay(1, 1, 2));
 	}
 	
+	@Test
+	public void whenAllTimesDifferentAfterMidnight()
+	{
+		assertEquals(28, babySitter.calculatePay(1, 2, 3));
+	}
+	
+	@Test
+	public void whenBedTimeIsOneHourAfterStartTimeAndEndTimeIsAfterMidnight()
+	{
+		assertEquals(28, babySitter.calculatePay(23, 24, 1));
+	}
+	
+	@Test
+	public void whenStartTimeisBeforeMidnightAndBedTimeAndEndTimeAreAfterMidnight()
+	{
+		assertEquals(56, babySitter.calculatePay(23, 1, 3));
+	}
+	
+	@Test
+	public void whenBedTimeIsOneHourAfterStartTimeAndEndTimeIsAfterMidnightScenario2()
+	{
+		assertEquals(44, babySitter.calculatePay(21, 22, 1));
+	}
+	
+	@Test
+	public void whenBedTimeIsTwoHoursAfterStartTimeAndEndTimeIsAfterMidnightScenario2()
+	{
+		assertEquals(48, babySitter.calculatePay(21, 23, 1));
+	}
+	
+	
 	
 	
 
