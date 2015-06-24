@@ -11,43 +11,32 @@ public class babySitter {
 	{
 		if(time < 12)
 			time += 24;
+		
 		return time;
 	}
 	
 	private static int calcStartToBedPay(int start, int bed, int end)
 	{
-		if((bed-start) >= 0)
-			return ((bed-start))*START_TIME_TO_BED_TIME_PAY;
-		else
-			return 0;
+		if((start <= bed) && (start <= MIDNIGHT))
+				return (Math.min(Math.min(bed, MIDNIGHT),end)-start)*START_TIME_TO_BED_TIME_PAY;
+		
+		return 0;
 	}
 	
 	private static int calcBedToMidnightPay(int start, int bed, int end)
 	{
-		if((MIDNIGHT-bed) >= 0)
-			if(end <= MIDNIGHT)
-				if(bed>=start)
-					return (end-bed)*BED_TIME_TO_MIDNIGHT_PAY;
-				else
-					return (end-start)*BED_TIME_TO_MIDNIGHT_PAY;
-			else
-				return (MIDNIGHT-bed)*BED_TIME_TO_MIDNIGHT_PAY;
-		else
-			return 0;
+		if((MIDNIGHT >= bed && (end >= bed)))
+			return (Math.min(MIDNIGHT,end) - Math.max(start,bed))*BED_TIME_TO_MIDNIGHT_PAY;
+
+		return 0;
 	}
 	
 	private static int calcMidnightToEndPay(int start, int bed, int end)
 	{
-		if((end-MIDNIGHT) >= 0)
-			if(bed <= MIDNIGHT)
-					return (end-MIDNIGHT)*AFTER_MIDNIGHT_PAY;
-			else
-				if(bed>=start)
-					return (end-bed)*AFTER_MIDNIGHT_PAY;
-				else
-					return (end-start)*AFTER_MIDNIGHT_PAY;
-		else
-			return 0;
+		if((end >= MIDNIGHT))
+			return (end-Math.max(start, MIDNIGHT))*AFTER_MIDNIGHT_PAY;
+
+		return 0;
 	}
 	
 	public static int calculatePay(int startTime, int bedTime, int endTime)
@@ -65,8 +54,6 @@ public class babySitter {
 		
 		return pay;
 		
-		
 	}
-	
 }
 
